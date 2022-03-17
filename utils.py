@@ -22,3 +22,7 @@ def missing_values_table(df):
           "There are " + str(mis_val_table_ren_columns.shape[0]) +
           " columns that have missing values.")
     return mis_val_table_ren_columns
+
+
+def get_percent_missing(df: pd.DataFrame):
+    return df.isnull().sum() * 100 / len(df)
