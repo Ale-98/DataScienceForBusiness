@@ -22,8 +22,12 @@ def missing_values_table(df):
     return mis_val_table_ren_columns
 
 
-def get_percent_missing(df: pd.DataFrame):
-    return df.isnull().sum() * 100 / len(df)
+def get_percent_missing(df: pd.DataFrame, columns=None):
+    percent_missing = df.isnull().sum() * 100 / len(df)
+    if not columns:
+        return percent_missing
+
+    return percent_missing[columns]
 
 
 def trimmed_mean(df: pd.DataFrame, column: str, limit: float):
