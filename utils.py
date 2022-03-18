@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 from scipy import stats
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def get_right_whisker(df: pd.DataFrame, field: str) -> pd.DataFrame:
     q3 = np.percentile(df[field], 75)
@@ -65,3 +67,13 @@ def variability_measures(df: pd.DataFrame, column: str, limit: float):
     print(f'Trimmed mean on column {column} with limit {limit}: {trimmed_mean(df, column, limit)}')
     print(f'Mean absolute deviation on column {column}: {mean_absolute_deviation(df, column)}')
     print(f'Median absolute deviation on column {column}: {median_absolute_deviation(df, column)}')
+
+def plot_frequency_pie(df: pd.DataFrame, column: str):
+    freq_table = df[column].value_counts()
+    ax2 = freq_table.plot.pie(
+        x=freq_table.index,
+        y=freq_table.values,
+    )
+    colors = sns.color_palette('pastel')[0:5]
+    plt.pie(freq_table.values, labels=freq_table.index, colors=colors, autopct='%.0f%%')
+    plt.show()
