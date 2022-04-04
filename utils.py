@@ -34,7 +34,7 @@ def get_percent_missing(df: pd.DataFrame, columns=None):
 
 def trimmed_mean(df: pd.DataFrame, column: str, limit: float):
     '''Calculates the trimmed mean of the given column and with the given limit'''
-    col_sorted = df.column.sort_values()
+    col_sorted = df[column].sort_values()
     col_sorted = col_sorted.reset_index(drop=True, inplace=False)
     upper_limit = col_sorted.quantile(1-limit)
     lower_limit = col_sorted.quantile(limit)
@@ -45,25 +45,25 @@ def trimmed_mean(df: pd.DataFrame, column: str, limit: float):
 
 def mean_absolute_deviation(df: pd.DataFrame, column: str):
     '''Calculates the mean absolute deviation of the given column'''
-    mean = df.column.mean()
-    num = np.sum(np.abs(df.column.values - mean)) / len(df.column)
+    mean = df[column].mean()
+    num = np.sum(np.abs(df[column].values - mean)) / len(df[column])
     return num
 
 
 def median_absolute_deviation(df: pd.DataFrame, column: str):
     '''Calculates the median absolute deviation of the given column'''
-    median = df.column.median()
-    num = np.sum(np.abs(df.column.values - median)) / len(df.column)
+    median = df[column].median()
+    num = np.sum(np.abs(df[column].values - median)) / len(df[column])
     return num
 
 
 def variability_measures(df: pd.DataFrame, column: str, limit: float):
     '''Calculates some measures of variability on the given column of the given pandas dataframe'''
-    print(f'Mean on column {column}: {df.column.mean()}')
-    print(f'Median on column {column}: {df.column.median()}')
-    print(f'Mode on column {column}: {df.column.mode()}')
-    print(f'Variance on column {column}: {df.column.var()}')
-    print(f'Standard deviation on column {column}: {df.column.std()}')
+    print(f'Mean on column {column}: {df[column].mean()}')
+    print(f'Median on column {column}: {df[column].median()}')
+    print(f'Mode on column {column}: {df[column].mode()}')
+    print(f'Variance on column {column}: {df[column].var()}')
+    print(f'Standard deviation on column {column}: {df[column].std()}')
     print(f'Trimmed mean on column {column} with limit {limit}: {trimmed_mean(df, column, limit)}')
     print(f'Mean absolute deviation on column {column}: {mean_absolute_deviation(df, column)}')
     print(f'Median absolute deviation on column {column}: {median_absolute_deviation(df, column)}')
