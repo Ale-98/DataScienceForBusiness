@@ -6,5 +6,7 @@ Our idea is to extract useful information each other, and then compare and inter
 # Notes
 If you want to **run** the two jupyter notebooks remember to install the requirements with the command:
 ```
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
