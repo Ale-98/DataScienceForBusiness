@@ -81,3 +81,10 @@ def plot_frequency_pie(df: pd.DataFrame, column: str):
     colors = sns.color_palette('pastel')[0:5]
     plt.pie(freq_table.values, labels=freq_table.index, colors=colors, autopct='%.0f%%')
     plt.show()
+
+def sort_by(df: pd.DataFrame, column: str):
+    df = df.sort_values(by=column, ascending=True)
+    df.reset_index(drop=True, inplace=True)
+    min_ok = df.DATA.min() == df.DATA[0]
+    max_ok = df.DATA.max() == df.DATA[len(df) - 1]
+    print('Sorted' if min_ok and max_ok else 'Not sorted')
