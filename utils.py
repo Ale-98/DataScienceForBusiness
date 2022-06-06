@@ -3,6 +3,7 @@ import numpy as np
 from scipy import stats
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.metrics import mean_squared_error, r2_score
 
 def get_right_whisker(df: pd.DataFrame, field: str) -> pd.DataFrame:
     q3 = np.percentile(df[field], 75)
@@ -88,3 +89,25 @@ def sort_by(df: pd.DataFrame, column: str):
     min_ok = df.DATA.min() == df.DATA[0]
     max_ok = df.DATA.max() == df.DATA[len(df) - 1]
     print('Sorted' if min_ok and max_ok else 'Not sorted')
+
+def overfit_eval(model, X, Y):
+    
+    """
+    model: the trained model
+    X: a tuple like (x_train, x_test)
+    Y: a tuple like (Y_train, Y_test)
+    """
+
+    Y_pred_train = model.predict(X[0])
+    Y_pred_test = model.predict(X[1])
+    
+    mse_train = mean_squared_error(Y[0], Y_pred_train)
+    mse_test = mean_squared_error(Y[1], Y_pred_test)
+
+    r2_train = r2_score(Y[0], Y_pred_train)
+    r2_test = r2_score(Y[1], Y_pred_test)  
+    
+    print("Train set:  MSE="+str(mse_train)+" R2="+str(r2_train))
+    print("Test set:  MSE="+str(mse_test)+" R2="+str(r2_test))
+
+    return (mse_train, mse_test), (r2_train, r2_test)
