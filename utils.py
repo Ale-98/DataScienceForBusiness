@@ -1,3 +1,4 @@
+from calendar import c
 import pandas as pd
 import numpy as np
 from scipy import stats
@@ -63,6 +64,7 @@ def variability_measures(df: pd.DataFrame, column: str, limit: float):
     print(f'Mean on column {column}: {df[column].mean()}')
     print(f'Median on column {column}: {df[column].median()}')
     print(f'Mode on column {column}: {df[column].mode()}')
+    print(f'Range of values on column {column}: {[df[column].min(), df[column].max()]}')
     print(f'Variance on column {column}: {df[column].var()}')
     print(f'Standard deviation on column {column}: {df[column].std()}')
     print(f'Trimmed mean on column {column} with limit {limit}: {trimmed_mean(df, column, limit)}')
